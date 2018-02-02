@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/lal0fxoue8bx5diki5a0d9qm/image_1c5a71uoq1p661g0m4mi1dokrhj1p.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/gxic66bfp0vlc83mpfpyyuu1/image_1c5a796duum62541tlcjlm1mgh9.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/fix3w55lmadlg6lfdhbb6n7e/image_1c5a7i8hgi0799t23l1ak419bpm.png">
-<meta property="og:updated_time" content="2018-02-02T09:03:29.059Z">
+<meta property="og:updated_time" content="2018-02-02T10:47:14.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能序列化协议protobuf初探">
 <meta name="twitter:description" content="在网络传输过程中，数据或对象在发送端进行序列化serialize，转成二进制；然后接受端需要对数据或对象进行反序列化unserialize，变成可用的类型。 首先来看看一般我们是怎么对一个对象进行序列化的。">
@@ -246,6 +246,8 @@
 </blockquote>
 <p>那么netty作为一个卓越的通信框架，自然对protobuf做了友好集成，使用也非常方便，只需要在channelPipeLine中添加我们的protobufDeCoder和protobufEnCoder就行。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bootstrap.setPipelineFactory(<span class="keyword">new</span> ChannelPipelineFactory() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ChannelPipeline <span class="title">getPipeline</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ChannelPipeline pipeline = Channels.pipeline();</span><br><span class="line">        pipeline.addLast(<span class="string">"1"</span>,<span class="keyword">new</span> ProtobufVarint32FrameDecoder());</span><br><span class="line">        pipeline.addLast(<span class="string">"2"</span>,<span class="keyword">new</span> ProtobufDecoder(UserProto.User.getDefaultInstance()));</span><br><span class="line">        pipeline.addLast(<span class="string">"3"</span>,<span class="keyword">new</span> ProtobufVarint32LengthFieldPrepender());</span><br><span class="line">        pipeline.addLast(<span class="string">"4"</span>,<span class="keyword">new</span> ProtobufEncoder());</span><br><span class="line">        pipeline.addLast(<span class="string">"5"</span>,<span class="keyword">new</span> MyServerMessageHandler());</span><br><span class="line">        <span class="keyword">return</span> pipeline;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<p>CSDN:  <a href="http://blog.csdn.net/mayibz/article/details/79241304" target="_blank" rel="noopener">http://blog.csdn.net/mayibz/article/details/79241304</a></p>
 
       
 	 
