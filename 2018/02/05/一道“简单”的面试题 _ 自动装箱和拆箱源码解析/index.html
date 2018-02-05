@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://mayibz.me">
   <title>一道“简单”的面试题 _ 自动装箱和拆箱源码解析 | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1   123456789public static void main(String[] args)&amp;#123;    public static void main(String[] args) &amp;#123;        Integer a = 1;        Integ">
+  <meta name="description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
 <meta name="keywords" content="jdk">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">
 <meta property="og:url" content="http://mayibz.me/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
-<meta property="og:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1   123456789public static void main(String[] args)&amp;#123;    public static void main(String[] args) &amp;#123;        Integer a = 1;        Integ">
+<meta property="og:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/4hr4peg4w9nx3w1m68tmq557/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/2rwbmsblfdad08ooyd4q9mtl/image.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/3y4ui9xxew83wxijm5je53de/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/76dl5nii3ig51k0qf7qu8esz/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/j347qqxro9gkl92w3y8b7zwv/image.png">
-<meta property="og:updated_time" content="2018-02-05T07:45:48.239Z">
+<meta property="og:updated_time" content="2018-02-05T07:48:48.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">
-<meta name="twitter:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1   123456789public static void main(String[] args)&amp;#123;    public static void main(String[] args) &amp;#123;        Integer a = 1;        Integ">
+<meta name="twitter:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
 <meta name="twitter:image" content="http://static.zybuluo.com/mayibz/4hr4peg4w9nx3w1m68tmq557/image.png">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
@@ -201,6 +201,7 @@
 <blockquote>
 <p>描述:  实现swap(a,b)函数，交换a和b的值。输出：<br>  交换前 a=1 b=2<br>交换后 a=2 b=1 </p>
 </blockquote>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer a = <span class="number">1</span>;</span><br><span class="line">        Integer b = <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">"交换前 a="</span>+a+<span class="string">" b="</span>+b);</span><br><span class="line">        swap(a,b);</span><br><span class="line">        System.out.println(<span class="string">"交换后 a="</span>+a+<span class="string">" b="</span>+b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>简单吗？ 来看看到底坑有多少？</p>
 <blockquote>
@@ -501,11 +502,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jdk</a>
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+                <a href="javascript:void(0)" class="js-tag color4">jdk</a>
               </li>
              
               <li class="article-tag-list-item">
