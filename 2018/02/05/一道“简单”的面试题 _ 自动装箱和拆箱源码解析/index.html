@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/3y4ui9xxew83wxijm5je53de/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/76dl5nii3ig51k0qf7qu8esz/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/j347qqxro9gkl92w3y8b7zwv/image.png">
-<meta property="og:updated_time" content="2018-02-05T07:57:26.193Z">
+<meta property="og:updated_time" content="2018-02-05T08:17:41.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道“简单”的面试题_自动装箱和拆箱源码解析">
 <meta name="twitter:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
@@ -234,6 +234,7 @@ class Field extends AccessibleObject implements Member</code> 发现它继承自
 <p>所以，至此，我们终于明白了结果为什么没有达到我们预想的值。那么这道题该怎么改呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void swap(Integer a1,Integer b1) throws NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">        Field value = Integer.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">        value.setAccessible(true);</span><br><span class="line">        int temp = a1.intValue();</span><br><span class="line">        value.set(a1,b1.intValue());</span><br><span class="line">        value.set(b1,new Integer(temp));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>没错，只要new个Integer就行了。<br><img src="http://static.zybuluo.com/mayibz/j347qqxro9gkl92w3y8b7zwv/image.png" alt="image.png-13kB"></p>
 <p>或者，我们用Filed类提供的setInt(Object obj,int i)也是可以的。</p>
+<p>CSDN: <a href="http://blog.csdn.net/mayibz/article/details/79261200" target="_blank" rel="noopener">http://blog.csdn.net/mayibz/article/details/79261200</a></p>
 
       
 	 
