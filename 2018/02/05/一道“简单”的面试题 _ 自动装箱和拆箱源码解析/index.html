@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://mayibz.me">
-  <title>一道“简单”的面试题 _ 自动装箱和拆箱源码解析 | 蚂蚁的宝藏</title>
+  <title>一道“简单”的面试题_自动装箱和拆箱源码解析 | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
 <meta name="keywords" content="jdk">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">
+<meta property="og:title" content="一道“简单”的面试题_自动装箱和拆箱源码解析">
 <meta property="og:url" content="http://mayibz.me/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
 <meta property="og:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
@@ -24,9 +24,9 @@
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/3y4ui9xxew83wxijm5je53de/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/76dl5nii3ig51k0qf7qu8esz/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/j347qqxro9gkl92w3y8b7zwv/image.png">
-<meta property="og:updated_time" content="2018-02-05T07:48:48.782Z">
+<meta property="og:updated_time" content="2018-02-05T07:52:16.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">
+<meta name="twitter:title" content="一道“简单”的面试题_自动装箱和拆箱源码解析">
 <meta name="twitter:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1">
 <meta name="twitter:image" content="http://static.zybuluo.com/mayibz/4hr4peg4w9nx3w1m68tmq557/image.png">
   
@@ -183,7 +183,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      一道“简单”的面试题 _ 自动装箱和拆箱源码解析
+      一道“简单”的面试题_自动装箱和拆箱源码解析
     </h1>
   
 
@@ -205,21 +205,24 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer a = <span class="number">1</span>;</span><br><span class="line">        Integer b = <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">"交换前 a="</span>+a+<span class="string">" b="</span>+b);</span><br><span class="line">        swap(a,b);</span><br><span class="line">        System.out.println(<span class="string">"交换后 a="</span>+a+<span class="string">" b="</span>+b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>简单吗？ 来看看到底坑有多少？</p>
 <blockquote>
-<p>坑 一：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a1,Integer b1)</span></span>&#123;</span><br><span class="line">    Integer temp = a1;</span><br><span class="line">    a1 = b1;</span><br><span class="line">    b1 = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>坑 一</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a1,Integer b1)</span></span>&#123;</span><br><span class="line">    Integer temp = a1;</span><br><span class="line">    a1 = b1;</span><br><span class="line">    b1 = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个写法，了解值传递的话，都不难看出，是不会成功的，这个操作只是，让a1的引用指向了b,让b1的引用指向了a。</p>
 <p>Integer里面不是用int的value来保存值吗？那么我用setValue(int value)不就好咯？可是，Integer并没有这个方法,怎么办？那干脆用反射来暴力修改这个value。</p>
 <blockquote>
-<p>坑 二：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a1,Integer b1)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">        Field value = Integer.class.getDeclaredField(<span class="string">"value"</span>);</span><br><span class="line">        <span class="keyword">int</span> temp = a1.intValue();</span><br><span class="line">        value.set(a1,b1.intValue());</span><br><span class="line">        value.set(b1,temp);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>坑 二</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a1,Integer b1)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">        Field value = Integer.class.getDeclaredField(<span class="string">"value"</span>);</span><br><span class="line">        <span class="keyword">int</span> temp = a1.intValue();</span><br><span class="line">        value.set(a1,b1.intValue());</span><br><span class="line">        value.set(b1,temp);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>可是运行一下，就发现又入坑了。<br><img src="http://static.zybuluo.com/mayibz/4hr4peg4w9nx3w1m68tmq557/image.png" alt="image.png-30.6kB"></p>
 <p>因为，Integer类中<code>private final int value;</code> value是private final类型的！也就是说jdk的法律命令禁止修改private属性的字段。我们仔细看看，到底有没有手段来强j这个字段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void set(Object obj, int i)</span><br><span class="line">        throws IllegalArgumentException, IllegalAccessException</span><br><span class="line">    &#123;</span><br><span class="line">        if (!override) &#123;</span><br><span class="line">            if (!Reflection.quickCheckMemberAccess(clazz, modifiers)) &#123;</span><br><span class="line">                Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">                checkAccess(caller, clazz, obj, modifiers);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        getFieldAccessor(obj).set(obj, i);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>在Filed的set方法中，有一个override的开关，默认是false，就会去检查字段的访问权限。那么怎么关闭它呢？<br>进入Filed字段 <code>public final
 class Field extends AccessibleObject implements Member</code> 发现它继承自AccessibleObject这个访问权限类，在这个类中，有个setAccessible方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setAccessible</span><span class="params">(AccessibleObject[] array, <span class="keyword">boolean</span> flag)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> SecurityException </span>&#123;</span><br><span class="line">        SecurityManager sm = System.getSecurityManager();</span><br><span class="line">        <span class="keyword">if</span> (sm != <span class="keyword">null</span>) sm.checkPermission(ACCESS_PERMISSION);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            setAccessible0(array[i], flag);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setAccessible0</span><span class="params">(AccessibleObject obj, <span class="keyword">boolean</span> flag)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> SecurityException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Constructor &amp;&amp; flag == <span class="keyword">true</span>) &#123;</span><br><span class="line">            Constructor&lt;?&gt; c = (Constructor&lt;?&gt;)obj;</span><br><span class="line">            <span class="keyword">if</span> (c.getDeclaringClass() == Class.class) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> SecurityException(<span class="string">"Cannot make a java.lang.Class"</span> +</span><br><span class="line">                                            <span class="string">" constructor accessible"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        obj.override = flag;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>可以看到，是通过设置这个flag来确定访问权限的。既然如此，那就设置一下咯</p>
 <blockquote>
-<p>坑 三<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a1,Integer b1)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">    Field value = Integer.class.getDeclaredField(<span class="string">"value"</span>);</span><br><span class="line">    value.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">int</span> temp = a1.intValue();</span><br><span class="line">    value.set(a1,b1.intValue());</span><br><span class="line">    value.set(b1,temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>坑 三</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a1,Integer b1)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">    Field value = Integer.class.getDeclaredField(<span class="string">"value"</span>);</span><br><span class="line">    value.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">int</span> temp = a1.intValue();</span><br><span class="line">    value.set(a1,b1.intValue());</span><br><span class="line">    value.set(b1,temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行~ 这次没报错，可是运行结果却很奇怪。<br><img src="http://static.zybuluo.com/mayibz/2rwbmsblfdad08ooyd4q9mtl/image.png" alt="image.png-14.1kB"></p>
 <p>b并不是我们预期的1，怎么回事呢，我们找到我们的class文件，javap看看它的字节码。<br><img src="http://static.zybuluo.com/mayibz/5mhgq8gzg94nzyxqlar4rtb4/image.png" alt="image.png-35.8kB"><br>再把1压栈后，执行了Integer里面的valueOf方法，做了装箱操作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">            <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果-128&lt;=i&lt;=127,就直接返回IntegerCache这个缓存中下标为i+128的值，否则的话new一个Integer。<br>IntegerCache是Integer的一个内部类。维护了256大小的一个Integer数组cache。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cache = new Integer[(high - low) + 1];</span><br><span class="line">            int j = low;</span><br><span class="line">            for(int k = 0; k &lt; cache.length; k++)</span><br><span class="line">                cache[k] = new Integer(j++);</span><br></pre></td></tr></table></figure></p>
@@ -235,7 +238,7 @@ class Field extends AccessibleObject implements Member</code> 发现它继承自
       
 	 
 	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" target="_blank" title="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">一道“简单”的面试题 _ 自动装箱和拆箱源码解析</a></b>,本文链接为<b><a href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" target="_blank" title="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">http://mayibz.me/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/</a></b>.</code></pre>
+            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" target="_blank" title="一道“简单”的面试题_自动装箱和拆箱源码解析">一道“简单”的面试题_自动装箱和拆箱源码解析</a></b>,本文链接为<b><a href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" target="_blank" title="一道“简单”的面试题_自动装箱和拆箱源码解析">http://mayibz.me/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/</a></b>.</code></pre>
         
 	
       
@@ -502,7 +505,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,11 +513,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">protobuf</a>
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">protobuf</a>
               </li>
             
             <div class="clearfix"></div>
