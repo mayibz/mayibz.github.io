@@ -6,18 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://mayibz.me">
-  <title>蚂蚁的宝藏</title>
+  <title>一道“简单”的面试题 _ 自动装箱和拆箱源码解析 | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="别看我只是个小菜鸡~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="蚂蚁的宝藏">
-<meta property="og:url" content="http://mayibz.me/index.html">
+  <meta name="description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1   123456789public static void main(String[] args)&amp;#123;    public static void main(String[] args) &amp;#123;        Integer a = 1;        Integ">
+<meta name="keywords" content="jdk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">
+<meta property="og:url" content="http://mayibz.me/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
-<meta property="og:description" content="别看我只是个小菜鸡~">
+<meta property="og:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1   123456789public static void main(String[] args)&amp;#123;    public static void main(String[] args) &amp;#123;        Integer a = 1;        Integ">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/4hr4peg4w9nx3w1m68tmq557/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/2rwbmsblfdad08ooyd4q9mtl/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/5mhgq8gzg94nzyxqlar4rtb4/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/3df1a2aec6xgb36xt0k9hx0r/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/2vb53lvj4cy1gd2vg8finc29/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/3y4ui9xxew83wxijm5je53de/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/76dl5nii3ig51k0qf7qu8esz/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/j347qqxro9gkl92w3y8b7zwv/image.png">
+<meta property="og:updated_time" content="2018-02-05T07:45:48.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="蚂蚁的宝藏">
-<meta name="twitter:description" content="别看我只是个小菜鸡~">
+<meta name="twitter:title" content="一道“简单”的面试题 _ 自动装箱和拆箱源码解析">
+<meta name="twitter:description" content="面试题：  描述:  实现swap(a,b)函数，交换a和b的值。输出：  交换前 a=1 b=2交换后 a=2 b=1   123456789public static void main(String[] args)&amp;#123;    public static void main(String[] args) &amp;#123;        Integer a = 1;        Integ">
+<meta name="twitter:image" content="http://static.zybuluo.com/mayibz/4hr4peg4w9nx3w1m68tmq557/image.png">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
   
@@ -165,16 +176,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-一道“简单”的面试题 _ 自动装箱和拆箱源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-一道“简单”的面试题 _ 自动装箱和拆箱源码解析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/">一道“简单”的面试题 _ 自动装箱和拆箱源码解析</a>
+    <h1 class="article-title" itemprop="name">
+      一道“简单”的面试题 _ 自动装箱和拆箱源码解析
     </h1>
   
 
@@ -229,6 +238,37 @@ class Field extends AccessibleObject implements Member</code> 发现它继承自
         
 	
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>如果有一天我的梦想被风雨淋湿，你是否愿意回头扶我一把？<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wxpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -247,16 +287,75 @@ class Field extends AccessibleObject implements Member</code> 发现它继承自
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://mayibz.me/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/02/02/高性能序列化协议protobuf初探/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">高性能序列化协议protobuf初探</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -276,256 +375,40 @@ class Field extends AccessibleObject implements Member</code> 发现它继承自
 
 
 
-
-  
-    <article id="post-高性能序列化协议protobuf初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/高性能序列化协议protobuf初探/">高性能序列化协议protobuf初探</a>
-    </h1>
-  
-
-
-        
-        <a href="/2018/02/02/高性能序列化协议protobuf初探/" class="archive-article-date">
-  	<time datetime="2018-02-02T08:50:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在网络传输过程中，数据或对象在发送端进行序列化serialize，转成二进制；然后接受端需要对数据或对象进行反序列化unserialize，变成可用的类型。</p>
-<p>首先来看看一般我们是怎么对一个对象进行序列化的。<br>
-        
-          <a class="article-more-a" href="/2018/02/02/高性能序列化协议protobuf初探/#more">more >></a>
-        
-      
 	 
-	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/02/02/高性能序列化协议protobuf初探/" target="_blank" title="高性能序列化协议protobuf初探">高性能序列化协议protobuf初探</a></b>,本文链接为<b><a href="/2018/02/02/高性能序列化协议protobuf初探/" target="_blank" title="高性能序列化协议protobuf初探">http://mayibz.me/2018/02/02/高性能序列化协议protobuf初探/</a></b>.</code></pre>
-        
+  
+  
+  
+  
+
+  
+
+  
+
+  
+  
+  	  
+			<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" style="width:90%;margin:0px auto" data-uid="MTAyMC8zMzc2MS8xMDMxNQ==">
+		<script type="text/javascript">
+		   (function(d, s) {
+			   var j, e = d.getElementsByTagName(s)[0];
+
+			   if (typeof LivereTower === 'function') { return; }
+
+			   j = d.createElement(s);
+			   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+			   j.async = true;
+
+			   e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
 	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">protobuf</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/02/高性能序列化协议protobuf初探/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Netty线程模型及源码浅析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/28/Netty线程模型及源码浅析/">Netty线程模型及源码浅析</a>
-    </h1>
-  
-
-
-        
-        <a href="/2018/01/28/Netty线程模型及源码浅析/" class="archive-article-date">
-  	<time datetime="2018-01-28T11:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总算是搭好了自己的博客，第一篇就写写最近关于netty的学习心得吧~~</p>
-<h2 id="netty初识"><a href="#netty初识" class="headerlink" title="- netty初识"></a>- <strong>netty初识</strong></h2><p>用过Dubbo的对netty应该都不陌生，Dubbo底层呢就用了netty 3，那么netty到底是个什么东西呢？<br>百度百科 “Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。” 我觉得netty就是优化了nio的高性能网络通信框架，当然它也支持旧IO。<br>先看看jdk的nio吧，我们都知道nio是单线程非阻塞IO，底层由操作系统的Reactor多路复用实现。单线程这个特性，就决定了它无法高效的利用cpu资源。那么我来尝试开启多个线程来处理SelectKey。<br>
-        
-          <a class="article-more-a" href="/2018/01/28/Netty线程模型及源码浅析/#more">more >></a>
-        
-      
-	 
-	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/01/28/Netty线程模型及源码浅析/" target="_blank" title="Netty线程模型及源码浅析">Netty线程模型及源码浅析</a></b>,本文链接为<b><a href="/2018/01/28/Netty线程模型及源码浅析/" target="_blank" title="Netty线程模型及源码浅析">http://mayibz.me/2018/01/28/Netty线程模型及源码浅析/</a></b>.</code></pre>
-        
 	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/28/Netty线程模型及源码浅析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客铭" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/28/博客铭/">博客铭</a>
-    </h1>
-  
-
-
-        
-        <a href="/2018/01/28/博客铭/" class="archive-article-date">
-  	<time datetime="2018-01-28T11:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>老师说，你如果能考虑清楚你以后要做什么事，你会领先别人5年。暑假实习的时候，老板第一句就问你的未来规划是什么？hr问，你5年后想过什么样的生活？<br>
-        
-          <a class="article-more-a" href="/2018/01/28/博客铭/#more">more >></a>
-        
-      
-	 
-	    
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/28/博客铭/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -554,8 +437,8 @@ class Field extends AccessibleObject implements Member</code> 发现它继承自
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
