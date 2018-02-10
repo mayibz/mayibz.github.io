@@ -6,25 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://mayibz.me">
-  <title>Netty线程模型及源码浅析 | 蚂蚁的宝藏</title>
+  <title>Tag: redis | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总算是搭好了自己的博客，第一篇就写写最近关于netty的学习心得吧~~ - netty初识用过Dubbo的对netty应该都不陌生，Dubbo底层呢就用了netty 3，那么netty到底是个什么东西呢？百度百科 “Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。” 我觉得netty就">
-<meta name="keywords" content="netty">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Netty线程模型及源码浅析">
-<meta property="og:url" content="http://mayibz.me/2018/01/28/Netty线程模型及源码浅析/index.html">
+  <meta name="description" content="别看我只是个小菜鸡~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="蚂蚁的宝藏">
+<meta property="og:url" content="http://mayibz.me/tags/redis/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
-<meta property="og:description" content="总算是搭好了自己的博客，第一篇就写写最近关于netty的学习心得吧~~ - netty初识用过Dubbo的对netty应该都不陌生，Dubbo底层呢就用了netty 3，那么netty到底是个什么东西呢？百度百科 “Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。” 我觉得netty就">
+<meta property="og:description" content="别看我只是个小菜鸡~">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/deeet5e3u5hm3yrwt16hrbjt/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/nltoesohku1s97az43fipnf9/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/w1x8m8jcraed87f68e31rp22/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/qqgnyx8cphqezzmvvx2gfrec/image.png">
-<meta property="og:updated_time" content="2018-02-01T09:48:42.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Netty线程模型及源码浅析">
-<meta name="twitter:description" content="总算是搭好了自己的博客，第一篇就写写最近关于netty的学习心得吧~~ - netty初识用过Dubbo的对netty应该都不陌生，Dubbo底层呢就用了netty 3，那么netty到底是个什么东西呢？百度百科 “Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。” 我觉得netty就">
-<meta name="twitter:image" content="http://static.zybuluo.com/mayibz/deeet5e3u5hm3yrwt16hrbjt/image.png">
+<meta name="twitter:title" content="蚂蚁的宝藏">
+<meta name="twitter:description" content="别看我只是个小菜鸡~">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
   
@@ -172,269 +165,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Netty线程模型及源码浅析" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Netty线程模型及源码浅析
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/02/10/动手搭_redis集群/" class="archive-article-date">
+  	<time datetime="2018-02-10T08:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/02/10/动手搭_redis集群/">动手搭_redis集群</a>
     </h1>
   
 
 
-        
-        <a href="/2018/01/28/Netty线程模型及源码浅析/" class="archive-article-date">
-  	<time datetime="2018-01-28T11:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总算是搭好了自己的博客，第一篇就写写最近关于netty的学习心得吧~~</p>
-<h2 id="netty初识"><a href="#netty初识" class="headerlink" title="- netty初识"></a>- <strong>netty初识</strong></h2><p>用过Dubbo的对netty应该都不陌生，Dubbo底层呢就用了netty 3，那么netty到底是个什么东西呢？<br>百度百科 “Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。” 我觉得netty就是优化了nio的高性能网络通信框架，当然它也支持旧IO。<br>先看看jdk的nio吧，我们都知道nio是单线程非阻塞IO，底层由操作系统的Reactor多路复用实现。单线程这个特性，就决定了它无法高效的利用cpu资源。那么我来尝试开启多个线程来处理SelectKey。<br><a id="more"></a></p>
-<hr>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listenSelector</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> n = <span class="keyword">this</span>.selector.select();</span><br><span class="line">        Iterator&lt;SelectionKey&gt; keys = selector.selectedKeys().iterator();</span><br><span class="line">        <span class="keyword">while</span> (keys.hasNext())&#123;</span><br><span class="line">            <span class="keyword">final</span> SelectionKey key = keys.next();</span><br><span class="line">            keys.remove();</span><br><span class="line"><span class="comment">//                handler(key);</span></span><br><span class="line">               <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            handler(key);</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;).start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handler</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(key.isAcceptable())&#123;</span><br><span class="line">        System.out.println(<span class="string">"新的客户端连接。。。"</span>);</span><br><span class="line">        ServerSocketChannel server = (ServerSocketChannel) key.channel();</span><br><span class="line">        SocketChannel channel = server.accept();</span><br><span class="line">        channel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">        channel.register(<span class="keyword">this</span>.selector,SelectionKey.OP_READ);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(key.isReadable())&#123;</span><br><span class="line">        SocketChannel channel = (SocketChannel) key.channel();</span><br><span class="line">        ByteBuffer buffer  = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">        <span class="keyword">int</span> len = channel.read(buffer);</span><br><span class="line">        <span class="keyword">if</span>(len &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            String msg = <span class="keyword">new</span> String(buffer.array(),<span class="string">"GBK"</span>).trim();</span><br><span class="line">            System.out.println(<span class="string">"接受的消息："</span>+msg);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"客户端关闭"</span>);</span><br><span class="line">            key.cancel();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><img src="http://static.zybuluo.com/mayibz/deeet5e3u5hm3yrwt16hrbjt/image.png" alt="image.png-17.8kB"><br>为什么会报空指针异常呢？<br>原因是 在listenSelector()方法里，轮询事件的时候，key.remove()方法并没有真正的做到移除，只有当处理该key的线程执行完，才会移除。所以执行到<code>ServerSocketChannel server = (ServerSocketChannel) key.channel();</code> 时，server为空。</p>
-<p>那么怎么才能实现多线程非阻塞IO呢？先不谈aio，看看Netty是怎么做的吧。</p>
-<ul>
-<li><strong>netty模块</strong></li>
-</ul>
-<p>我在学习netty时，下的是3.10.3版本。<br><img src="http://static.zybuluo.com/mayibz/nltoesohku1s97az43fipnf9/image.png" alt="image.png-15kB"><br>它的目录结构就是这样，<br>bootstrap包下是一些启动类；<br>buffer包下对Nio的ByteBuffer做了包装和优化，ChannelBuffer就在该包下；<br>channel包处理server和client的连接通道<br>container是连接其他容器的一个类，比如连接spring<br>handler当然是处理类了，比如协议的编解码等<br>logging 日志咯<br>util 工具包</p>
-<ul>
-<li><strong>netty架构</strong></li>
-</ul>
-<p><img src="http://static.zybuluo.com/mayibz/w1x8m8jcraed87f68e31rp22/image.png" alt="image.png-174kB"><br>netty的架构图，翻译一下。<br>core核心部分: Extensible Event Model 可扩展的事件模型<br>              Universal Communication API 统一的通信API，对应channal包<br>              Zero-Copy-Capable Rich Byte Buffer 零拷贝的Buffer：（数据传输过程中，需要对协议的报文进行组合和拆分。netty通过CompositeByteBuf类，将多个 ByteBuf 合并为一个逻辑上的 ByteBuf, 避免了各个 ByteBuf 之间的拷贝）</p>
-<p>以及Transport Services传输层服务，Protocol Support应用层的一些协议支持</p>
-<ul>
-<li><strong>线程模型</strong></li>
-</ul>
-<p>netty的高效之处，就在于它底层的主从多线程Reactor模型</p>
-<p><img src="http://static.zybuluo.com/mayibz/qqgnyx8cphqezzmvvx2gfrec/image.png" alt="image.png-159.1kB"><br>它维护了两个TheadPool，Main Reactor Acceptor pool，对应源码中的NioServerBoss; Sub Reactor IO Thread Pool，对应源码中的NioWork。<br>简单来说，就是客户端发出连接请求后，通过main转发到sub,sub会在一个独立的线程池中运行，并维护了两个队列，每个线程都有一个独立的selector。main转发过来的请求会放到任务队列中，sub会去处理队列中的任务。读写请求就会交个对应的handler去处理。</p>
-<p>事实上看到AbstractNioSelector中run()的代码，不难看出，boos和word都做了这几件事：<br>1：设置标志位 wakeup.set(false);<br>2：Selector(注册);<br>3: 处理任务队列(processTaskQueue());<br>4: 处理自己的业务(process(selector);)</p>
-<h3 id="源码"><a href="#源码" class="headerlink" title="- 源码"></a>- <strong>源码</strong></h3><p>好了，终于要看源码了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by 蚂蚁的宝藏 on 2018/1/22.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        ServerBootstrap bootstrap = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">        ExecutorService boss = Executors.newCachedThreadPool();</span><br><span class="line">        ExecutorService worker = Executors.newCachedThreadPool();</span><br><span class="line">        bootstrap.setFactory(<span class="keyword">new</span> NioServerSocketChannelFactory(boss,worker));</span><br><span class="line">        bootstrap.setPipelineFactory(<span class="keyword">new</span> ChannelPipelineFactory() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> ChannelPipeline <span class="title">getPipeline</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                ChannelPipeline pipeline = Channels.pipeline();</span><br><span class="line">                pipeline.addLast(<span class="string">"decoder"</span>,<span class="keyword">new</span> StringDecoder());</span><br><span class="line">                pipeline.addLast(<span class="string">"encoder"</span>,<span class="keyword">new</span> StringEncoder());</span><br><span class="line">                pipeline.addLast(<span class="string">"myHandler"</span>,<span class="keyword">new</span> MyServerMessageHandler());</span><br><span class="line">                <span class="keyword">return</span> pipeline;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        bootstrap.bind(<span class="keyword">new</span> InetSocketAddress(<span class="number">7777</span>));</span><br><span class="line">        System.out.println(<span class="string">"服务启动"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从<code>new NioServerSocketChannelFactory(boss,worker)</code>进去。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NioServerSocketChannelFactory</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        Executor bossExecutor, Executor workerExecutor)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(bossExecutor, workerExecutor, getMaxThreads(workerExecutor));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>来看看<code>getMaxThreads(workerExecutor)</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMaxThreads</span><span class="params">(Executor executor)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (executor <span class="keyword">instanceof</span> ThreadPoolExecutor) &#123;</span><br><span class="line">           <span class="keyword">final</span> <span class="keyword">int</span> maxThreads = ((ThreadPoolExecutor) executor).getMaximumPoolSize();</span><br><span class="line">           <span class="keyword">return</span> Math.min(maxThreads, SelectorUtil.DEFAULT_IO_THREADS);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> SelectorUtil.DEFAULT_IO_THREADS;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_IO_THREADS = Runtime.getRuntime().availableProcessors() * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>我电脑4核来说，<code>DEFAULT_IO_THREADS</code>就是8，那么cacheTheadPool这个线程池大小肯定大于8吧，所以这个方法只是对work线程池的大小做了限制，就是你不能比8大。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">NioServerSocketChannelFactory</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        Executor bossExecutor, Executor workerExecutor,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> workerCount)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(bossExecutor, <span class="number">1</span>, workerExecutor, workerCount);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>继续，可以看到，boss默认大小是1.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NioServerSocketChannelFactory</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        Executor bossExecutor, <span class="keyword">int</span> bossCount, Executor workerExecutor,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span> workerCount)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(bossExecutor, bossCount, <span class="keyword">new</span> NioWorkerPool(workerExecutor, workerCount));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来，先对workPool进行了初始化。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NioWorkerPool</span><span class="params">(Executor workerExecutor, <span class="keyword">int</span> workerCount, ThreadNameDeterminer determiner)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(workerExecutor, workerCount, <span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">this</span>.determiner = determiner;</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!initialized.compareAndSet(<span class="keyword">false</span>, <span class="keyword">true</span>)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"initialized already"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; workers.length; i++) &#123;</span><br><span class="line">        workers[i] = newWorker(workerExecutor);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    waitForWorkerThreads();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>做了什么操作呢，就是创建了8个work,看<code>newWorker(workerExecutor)</code>做了啥<br>一路点，来到了最上层，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    AbstractNioSelector(Executor executor, ThreadNameDeterminer determiner) &#123;</span><br><span class="line">    <span class="keyword">this</span>.executor = executor;</span><br><span class="line">    openSelector(determiner);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>openSelector做了什么事？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">openSelector</span><span class="params">(ThreadNameDeterminer determiner)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        selector = SelectorUtil.open();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ChannelException(<span class="string">"Failed to create a selector."</span>, t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Start the worker thread with the new Selector.</span></span><br><span class="line">    <span class="keyword">boolean</span> success = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        DeadLockProofWorker.start(executor, newThreadRenamingRunnable(id, determiner));</span><br><span class="line">        success = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">            <span class="comment">// Release the Selector if the execution fails.</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                selector.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                logger.warn(<span class="string">"Failed to close a selector."</span>, t);</span><br><span class="line">            &#125;</span><br><span class="line">            selector = <span class="keyword">null</span>;</span><br><span class="line">            <span class="comment">// The method will return to the caller at this point.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">assert</span> selector != <span class="keyword">null</span> &amp;&amp; selector.isOpen();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>没错吧，每个work都有一个selector，重点在<code>DeadLockProofWorker.start(executor, newThreadRenamingRunnable(id, determiner));</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(<span class="keyword">final</span> Executor parent, <span class="keyword">final</span> Runnable runnable)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (parent == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"parent"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (runnable == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"runnable"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    parent.execute(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            PARENT.set(parent);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                runnable.run();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                PARENT.remove();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>workpool开启8个线程，调用了NioWork的run方法，但是NioWork没有run方法，再去找他的父类，在AbstractNioSelector中找到了run方法，代码太长，我把重点的挑出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> Selector selector = <span class="keyword">this</span>.selector;</span><br><span class="line"> <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">         wakenUp.set(<span class="keyword">false</span>);</span><br><span class="line">         ...</span><br><span class="line">         <span class="keyword">if</span> (wakenUp.get()) &#123;</span><br><span class="line">                 wakenupFromLoop = <span class="keyword">true</span>;</span><br><span class="line">                 selector.wakeup();</span><br><span class="line">             &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                 wakenupFromLoop = <span class="keyword">false</span>;</span><br><span class="line">             &#125;</span><br><span class="line">             processTaskQueue();</span><br><span class="line">             ...</span><br><span class="line">             process(selector);</span><br><span class="line">             ...</span><br><span class="line">         &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
-<p>这个方法是关键，selector赋值，标志位设false，处理任务队列，处理自己的业务。<br>如果wakenUp.get()为false，那么该线程就会阻塞，不会去处理任务队列和自己的业务。<br>既然如此，那么work线程什么时候唤醒呢？其实它是有boss唤醒的，待会看boss代码就知道了。</p>
-<p>其实NioWork和NioBoss都是它的子类，所以都会调用它。区别就是<code>processTaskQueue()</code>里处理的task和<code>process(selector)</code>的处理有所不同。那么来看看work怎么处理任务队列的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processTaskQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">         <span class="keyword">final</span> Runnable task = taskQueue.poll();</span><br><span class="line">         <span class="keyword">if</span> (task == <span class="keyword">null</span>) &#123;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         task.run();</span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line">             cleanUpCancelledKeys();</span><br><span class="line">         &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">             <span class="comment">// Ignore</span></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
-<p>从队列里取task，然后执行，没毛病吧？这个task就是NioWork自己的内部类，来看看这个类里的run做了什么。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         SocketAddress localAddress = channel.getLocalAddress();</span><br><span class="line">         SocketAddress remoteAddress = channel.getRemoteAddress();</span><br><span class="line">    </span><br><span class="line">         <span class="keyword">if</span> (localAddress == <span class="keyword">null</span> || remoteAddress == <span class="keyword">null</span>) &#123;</span><br><span class="line">             <span class="keyword">if</span> (future != <span class="keyword">null</span>) &#123;</span><br><span class="line">                 future.setFailure(<span class="keyword">new</span> ClosedChannelException());</span><br><span class="line">             &#125;</span><br><span class="line">             close(channel, succeededFuture(channel));</span><br><span class="line">             <span class="keyword">return</span>;</span><br><span class="line">         &#125;</span><br><span class="line">    </span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line">             <span class="keyword">if</span> (server) &#123;</span><br><span class="line">                 channel.channel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">             &#125;</span><br><span class="line">    </span><br><span class="line">             channel.channel.register(</span><br><span class="line">                     selector, channel.getInternalInterestOps(), channel);</span><br><span class="line">    </span><br><span class="line">             <span class="keyword">if</span> (future != <span class="keyword">null</span>) &#123;</span><br><span class="line">                 channel.setConnected();</span><br><span class="line">                 future.setSuccess();</span><br><span class="line">             &#125;</span><br><span class="line">    </span><br><span class="line">             <span class="keyword">if</span> (server || !((NioClientSocketChannel) channel).boundManually) &#123;</span><br><span class="line">                 fireChannelBound(channel, localAddress);</span><br><span class="line">             &#125;</span><br><span class="line">             fireChannelConnected(channel, remoteAddress);</span><br><span class="line">         &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">             <span class="keyword">if</span> (future != <span class="keyword">null</span>) &#123;</span><br><span class="line">                 future.setFailure(e);</span><br><span class="line">             &#125;</span><br><span class="line">             close(channel, succeededFuture(channel));</span><br><span class="line">             <span class="keyword">if</span> (!(e <span class="keyword">instanceof</span> ClosedChannelException)) &#123;</span><br><span class="line">                 <span class="keyword">throw</span> <span class="keyword">new</span> ChannelException(</span><br><span class="line">                         <span class="string">"Failed to register a socket to the selector."</span>, e);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-<p>看到<code>channel.channel.configureBlocking(false)；channel.channel.register(
-                    selector, channel.getInternalInterestOps(), channel);</code>这个，熟悉吧？不就nio的处理么？处理连接，注册等。<code>fireChannelConnected(channel, remoteAddress);</code>是对upstream上行事件的处理。<br>再来看看<code>process(Selector selector)</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Selector selector)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();</span><br><span class="line">    <span class="keyword">if</span> (selectedKeys.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Iterator&lt;SelectionKey&gt; i = selectedKeys.iterator(); i.hasNext();) &#123;</span><br><span class="line">        SelectionKey k = i.next();</span><br><span class="line">        i.remove();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> readyOps = k.readyOps();</span><br><span class="line">            <span class="keyword">if</span> ((readyOps &amp; SelectionKey.OP_READ) != <span class="number">0</span> || readyOps == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!read(k)) &#123;</span><br><span class="line">                    <span class="comment">// Connection already closed - no need to handle write.</span></span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ((readyOps &amp; SelectionKey.OP_WRITE) != <span class="number">0</span>) &#123;</span><br><span class="line">                writeFromSelectorLoop(k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CancelledKeyException e) &#123;</span><br><span class="line">            close(k);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> (cleanUpCancelledKeys()) &#123;</span><br><span class="line">        <span class="keyword">break</span>; <span class="comment">// break the loop to avoid ConcurrentModificationException</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>熟悉吧？轮询selectKey，处理读写事件。</p>
-<p>好了，接下来再看看NioServerBoss。<br>同样的，他构造方法的super点到顶层，来到了AbstractNioSelector,所以netty中，这个类做了很多工作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AbstractNioSelector(Executor executor, ThreadNameDeterminer determiner) &#123;</span><br><span class="line">    <span class="keyword">this</span>.executor = executor;</span><br><span class="line">    openSelector(determiner);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>同样的，维护了一个selector，然后开线程执行NioServerBoss的run方法,没找到，就执行AbstractNioSelector的run，。。。好吧，直接看boss的任务干了什么事。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> bound = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> registered = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            channel.socket.socket().bind(localAddress, channel.getConfig().getBacklog());</span><br><span class="line">            bound = <span class="keyword">true</span>;</span><br><span class="line"> future.setSuccess();</span><br><span class="line">        fireChannelBound(channel, channel.getLocalAddress());</span><br><span class="line">        channel.socket.register(selector, SelectionKey.OP_ACCEPT, channel);</span><br><span class="line">            registered = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            future.setFailure(t);</span><br><span class="line">            fireExceptionCaught(channel, t);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!registered &amp;&amp; bound) &#123;</span><br><span class="line">                close(channel, future);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>ok，没啥说的，注册监听客户端的连接事件。<br>来看boss的业务<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Iterator&lt;SelectionKey&gt; i = selectedKeys.iterator(); i.hasNext();) &#123;</span><br><span class="line">        SelectionKey k = i.next();</span><br><span class="line">        i.remove();</span><br><span class="line">        NioServerSocketChannel channel = (NioServerSocketChannel) k.attachment();</span><br><span class="line"> <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// accept connections in a for loop until no new connection is ready</span></span><br><span class="line">        <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">            SocketChannel acceptedSocket = channel.socket.accept();</span><br><span class="line">            <span class="keyword">if</span> (acceptedSocket == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            registerAcceptedChannel(channel, acceptedSocket, thread);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>轮询key，把客户端的连接事件，传入<code>registerAcceptedChannel(channel, acceptedSocket, thread)</code>这个方法，名字就是注册连接的通道的意思，来看看这个方法怎么做的。</p>
-<p>它通过<code>NioWorker worker = parent.workerPool.nextWorker();</code>通过一个原子int自增对读长度%操作拿到一个NioWork.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">nextWorker</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> (E) workers[Math.abs(workerIndex.getAndIncrement() % workers.length)];</span><br><span class="line">   &#125;</span><br><span class="line">   worker.register(<span class="keyword">new</span> NioAcceptedSocketChannel(</span><br><span class="line">               parent.getFactory(), pipeline, parent, sink</span><br><span class="line">               , acceptedSocket,</span><br><span class="line">               worker, currentThread), <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
-<p>然后<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.register(<span class="keyword">new</span> NioAcceptedSocketChannel(</span><br><span class="line">            parent.getFactory(), pipeline, parent, sink</span><br><span class="line">            , acceptedSocket,</span><br><span class="line">            worker, currentThread), <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
-<p>new了一个NioAcceptedSocketChannel,保存了pipeline,serverSocketChannel，acceptedSocket和当前线程信息，交给了worker。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(Channel channel, ChannelFuture future)</span> </span>&#123;</span><br><span class="line">    Runnable task = createRegisterTask(channel, future);</span><br><span class="line">    registerTask(task);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">registerTask</span><span class="params">(Runnable task)</span> </span>&#123;</span><br><span class="line">    taskQueue.add(task);</span><br><span class="line">    Selector selector = <span class="keyword">this</span>.selector;</span><br><span class="line">    <span class="keyword">if</span> (selector != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (wakenUp.compareAndSet(<span class="keyword">false</span>, <span class="keyword">true</span>)) &#123;</span><br><span class="line">            selector.wakeup();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (taskQueue.remove(task)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RejectedExecutionException(<span class="string">"Worker has already been shutdown"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>registerTask就是设置标志位为true，唤醒work线程！！</p>
-<p>所以boss就是通过这种注册的方式，改变了work的行为。<br>至此，work和boss都了解了。</p>
-<p>是不是，netty的主从多线程模型通过简单的分析源码后就更清楚了，^_^。</p>
-<hr>
-<p>CSDN:<a href="http://blog.csdn.net/mayibz/article/details/79208192" target="_blank" rel="noopener">http://blog.csdn.net/mayibz/article/details/79208192</a></p>
-
-      
-	 
-	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/01/28/Netty线程模型及源码浅析/" target="_blank" title="Netty线程模型及源码浅析">Netty线程模型及源码浅析</a></b>,本文链接为<b><a href="/2018/01/28/Netty线程模型及源码浅析/" target="_blank" title="Netty线程模型及源码浅析">http://mayibz.me/2018/01/28/Netty线程模型及源码浅析/</a></b>.</code></pre>
-        
-	
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>如果有一天我的梦想被风雨淋湿，你是否愿意回头扶我一把？<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/wxpay.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搭建</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://mayibz.me/2018/01/28/Netty线程模型及源码浅析/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/02/02/高性能序列化协议protobuf初探/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          高性能序列化协议protobuf初探
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/01/28/博客铭/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">博客铭</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-	 
-  
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
-  
-  	  
-			<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" style="width:90%;margin:0px auto" data-uid="MTAyMC8zMzc2MS8xMDMxNQ==">
-		<script type="text/javascript">
-		   (function(d, s) {
-			   var j, e = d.getElementsByTagName(s)[0];
-
-			   if (typeof LivereTower === 'function') { return; }
-
-			   j = d.createElement(s);
-			   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-			   j.async = true;
-
-			   e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	
-
-	
+    
 
 
           </div>
@@ -464,9 +253,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
