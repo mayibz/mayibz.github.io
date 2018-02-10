@@ -16,10 +16,21 @@
 <meta property="og:site_name" content="蚂蚁的宝藏">
 <meta property="og:description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-10T08:18:36.722Z">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/ji0y1ocpzab87beqx9jhn3el/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/sclrpfh8ixs27b0nwll8y15g/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/jxha2qyeh8api98ds7xpm81x/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/osy1l1abu6vlym2m1qj4thbm/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/hisi73gpi3spsdtgwdzguavk/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/vourdtpovtnp7q1s3rtw8xem/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/aex9nz74we8qibfwvib2tqus/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/nx96o15yh9hwl09vheye3pzf/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/fbl0xazu1sramgg6fcxtno71/image.png">
+<meta property="og:updated_time" content="2018-02-10T08:20:56.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动手搭_redis集群">
 <meta name="twitter:description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
+<meta name="twitter:image" content="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
   
@@ -191,25 +202,34 @@
         <p>搭建redis集群至少需要三个master节点。</p>
 <p>我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。</p>
 <a id="more"></a>
-<p> 修改配置文件</p>
-<p>创建集群配置目录，用端口号命名好区分 8001 &amp; 8002<br>复制redis.conf文件分别至8001和8002目录下。<br>修改redis.conf文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">port 8001     #端口号</span><br><span class="line">logfile srvredis-3.2.9cluster-conf8001redis.log  #指定日志文件</span><br><span class="line">dir srvredis-cluster8001              #数据存放文件位置rdb,aop,nodes.conf</span><br><span class="line">cluster-enabled yes                         #开启集群</span><br><span class="line">cluster-config-file  nodes.conf             #集群节点信息文件命名</span><br><span class="line">cluster-node-timeout 5000                   #集群节点超时毫秒数</span><br><span class="line">appendonly yes                              #开启aof持久化</span><br><span class="line">bind 0.0.0.0                                #绑定ip。</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改配置文件</p>
+</blockquote>
+<p>创建集群配置目录，用端口号命名好区分 8001 &amp; 8002<br>复制redis.conf文件分别至8001和8002目录下。<br>修改redis.conf文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">port 8001     #端口号</span><br><span class="line">logfile &quot;/srv/redis-3.2.9/cluster-conf/8001/redis.log&quot;  #指定日志文件</span><br><span class="line">dir &quot;/srv/redis-cluster/8001/&quot;              #数据存放文件位置rdb,aop,nodes.conf</span><br><span class="line">cluster-enabled yes                         #开启集群</span><br><span class="line">cluster-config-file  nodes.conf             #集群节点信息文件命名</span><br><span class="line">cluster-node-timeout 5000                   #集群节点超时毫秒数</span><br><span class="line">appendonly yes                              #开启aof持久化</span><br><span class="line">bind 0.0.0.0                                #绑定ip。</span><br></pre></td></tr></table></figure></p>
 <p>同理 130和131机器，修改这些配置。</p>
-<p> 启动节点</p>
-<p>cd 到bin目录下,<code>.redis-server ..8001redis.conf&amp;</code> 分别启动各自机器的8001和8002</p>
-<p> 创建集群</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.redis-trib.rb create --replicas 1 192.168.0.117001 192.168.0.127001 192.168.0.137001 192.168.0.117002 192.168.0.127002 192.168.0.137002 </span><br><span class="line"></span><br><span class="line">## 切换到src目录下，执行tedis-trib.rb集群管理命令</span><br><span class="line">## replicas 1 表示为集群中的每一个主节点通过创建的先后顺序创建一个从节点</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>启动节点</p>
+</blockquote>
+<p>cd 到bin目录下,<code>./redis-server ../8001/redis.conf&amp;</code> 分别启动各自机器的8001和8002</p>
+<blockquote>
+<p>创建集群</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./redis-trib.rb create --replicas 1 192.168.0.11:7001 192.168.0.12:7001 192.168.0.13:7001 192.168.0.11:7002 192.168.0.12:7002 192.168.0.13:7002 </span><br><span class="line"></span><br><span class="line">## 切换到src目录下，执行tedis-trib.rb集群管理命令</span><br><span class="line">## replicas 1 表示为集群中的每一个主节点通过创建的先后顺序创建一个从节点</span><br></pre></td></tr></table></figure>
 <p>redis-trib.rb需要先安装ruby环境 <code>yum install ruby</code> <code>yum install rubygems</code></p>
-<p>![image.png-67.8kB][1]<br>![image.png-81.7kB][2]</p>
+<p><img src="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png" alt="image.png-67.8kB"><br><img src="http://static.zybuluo.com/mayibz/ji0y1ocpzab87beqx9jhn3el/image.png" alt="image.png-81.7kB"></p>
 <p>集群信息代表意思分别是：</p>
 <p>节点id<br>ip：port<br>角色（master0 slaver1），主节点的id<br>节点最后一次返回pong回复的时间<br>连接次数<br>节点占有的槽(slot)</p>
-<p>![image.png-37.9kB][3]</p>
-<p> 测试</p>
-<p>通过<code>.redis-cli -c</code>集群连接模式，set一个key,可以看到，通过crc126算法定位到130这台机器对应的slot,然后存放。<br>![image.png-13.7kB][4]</p>
-<p>如果130机器上的master节点宕掉，能否拿到site的值？<br>![image.png-17.4kB][5]<br>![image.png-34.7kB][6]<br>停掉 130机器的8001 master节点。<br>![image.png-8.2kB][7]<br>可以看到，并没有收到影响，从129的8002 slave机器上取到了值。</p>
-<p>那么停到129的8002呢？<br>![image.png-15.5kB][8]<br>![image.png-7.1kB][9]<br>可以看到，集群挂掉了。所以结论：停掉一个master或者slave 服务正常，停掉master<br>和slave集群挂掉。</p>
-<p>重启这两个节点。<br>![image.png-35.7kB][10]<br>可以看到，redis通过选举，master身份发生了变化。</p>
-<p> 遇到的问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## usrbinenv ruby No such file or directory</span><br><span class="line">解决：安装ruby环境，不要直接yum install ruby，redis要求ruby版本2.4以上使用rvm安装。</span><br><span class="line"></span><br><span class="line">## .redis-trib.rb24in `require&apos; no such file to load -- rubygems (LoadError)</span><br><span class="line">from .redis-trib.rb24</span><br><span class="line">解决：yum install rubygems</span><br><span class="line"></span><br><span class="line">## in `gem_original_require&apos; no such file to load -- redis (LoadError)</span><br><span class="line">from usrlibrubysite_ruby1.8rubygemscustom_require.rb31in `require&apos;</span><br><span class="line">解决：gem install redis</span><br><span class="line"></span><br><span class="line">## 创建集群节点时出错，检查bind修改为0.0.0.0</span><br></pre></td></tr></table></figure></p>
-<p>  [1] httpstatic.zybuluo.commayibz9ho04osldte8r93l0nvciyffimage.png<br>  [2] httpstatic.zybuluo.commayibzji0y1ocpzab87beqx9jhn3elimage.png<br>  [3] httpstatic.zybuluo.commayibzsclrpfh8ixs27b0nwll8y15gimage.png<br>  [4] httpstatic.zybuluo.commayibzjxha2qyeh8api98ds7xpm81ximage.png<br>  [5] httpstatic.zybuluo.commayibzosy1l1abu6vlym2m1qj4thbmimage.png<br>  [6] httpstatic.zybuluo.commayibzhisi73gpi3spsdtgwdzguavkimage.png<br>  [7] httpstatic.zybuluo.commayibzvourdtpovtnp7q1s3rtw8xemimage.png<br>  [8] httpstatic.zybuluo.commayibzaex9nz74we8qibfwvib2tqusimage.png<br>  [9] httpstatic.zybuluo.commayibznx96o15yh9hwl09vheye3pzfimage.png<br>  [10] httpstatic.zybuluo.commayibzfbl0xazu1sramgg6fcxtno71image.png</p>
+<p><img src="http://static.zybuluo.com/mayibz/sclrpfh8ixs27b0nwll8y15g/image.png" alt="image.png-37.9kB"></p>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<p>通过<code>./redis-cli -c</code>集群连接模式，set一个key,可以看到，通过crc126算法定位到130这台机器对应的slot,然后存放。<br><img src="http://static.zybuluo.com/mayibz/jxha2qyeh8api98ds7xpm81x/image.png" alt="image.png-13.7kB"></p>
+<p>如果130机器上的master节点宕掉，能否拿到site的值？<br><img src="http://static.zybuluo.com/mayibz/osy1l1abu6vlym2m1qj4thbm/image.png" alt="image.png-17.4kB"><br><img src="http://static.zybuluo.com/mayibz/hisi73gpi3spsdtgwdzguavk/image.png" alt="image.png-34.7kB"><br>停掉 130机器的8001 master节点。<br><img src="http://static.zybuluo.com/mayibz/vourdtpovtnp7q1s3rtw8xem/image.png" alt="image.png-8.2kB"><br>可以看到，并没有收到影响，从129的8002 slave机器上取到了值。</p>
+<p>那么停到129的8002呢？<br><img src="http://static.zybuluo.com/mayibz/aex9nz74we8qibfwvib2tqus/image.png" alt="image.png-15.5kB"><br><img src="http://static.zybuluo.com/mayibz/nx96o15yh9hwl09vheye3pzf/image.png" alt="image.png-7.1kB"><br>可以看到，集群挂掉了。所以结论：<strong>停掉一个master或者slave 服务正常，停掉master<br>和slave集群挂掉。</strong></p>
+<p>重启这两个节点。<br><img src="http://static.zybuluo.com/mayibz/fbl0xazu1sramgg6fcxtno71/image.png" alt="image.png-35.7kB"><br>可以看到，redis通过选举，master身份发生了变化。</p>
+<blockquote>
+<p>遇到的问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## /usr/bin/env: ruby: No such file or directory</span><br><span class="line">解决：安装ruby环境，**不要直接yum install ruby，redis要求ruby版本2.4以上**使用rvm安装。</span><br><span class="line"></span><br><span class="line">## ./redis-trib.rb:24:in `require&apos;: no such file to load -- rubygems (LoadError)</span><br><span class="line">from ./redis-trib.rb:24</span><br><span class="line">解决：yum install rubygems</span><br><span class="line"></span><br><span class="line">## in `gem_original_require&apos;: no such file to load -- redis (LoadError)</span><br><span class="line">from /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require&apos;</span><br><span class="line">解决：gem install redis</span><br><span class="line"></span><br><span class="line">## 创建集群节点时出错，检查bind修改为0.0.0.0</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 
       
 	 
