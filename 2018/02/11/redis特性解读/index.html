@@ -19,7 +19,9 @@
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/qgcmeta7pm41t33lichtl91q/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/k7cupte3qacnn5a8ffebctso/image.png">
-<meta property="og:updated_time" content="2018-02-11T10:29:11.145Z">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/xc8pj4olvm3vig32ya0m8ekg/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/rbrcgcun2i9gcf6o982aa39f/image.png">
+<meta property="og:updated_time" content="2018-02-11T10:36:56.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis特性解读">
 <meta name="twitter:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。">
@@ -419,7 +421,7 @@
 <p>复制</p>
 </blockquote>
 <p>redis的复制方式有两种，一种是主（master）-从（slave），一种是从（slave）-从（slave）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">slave-&gt;master: 发送sync命令</span><br><span class="line">master-&gt;master: sub process</span><br><span class="line">master-&gt;slave: 发送rdb文件，发送缓存的命令</span><br><span class="line">slave-&gt;master: 发送增量数据</span><br></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/mayibz/xc8pj4olvm3vig32ya0m8ekg/image.png" alt="image.png-19.5kB"></p>
 <p>配置方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 复制一份配置文件 cp redis.conf slave.conf</span><br><span class="line"># 修改slave的配置 slaveof ip port</span><br><span class="line"># 修改master的配置 bind 0.0.0.0</span><br><span class="line"># 启动slave ./redis-server ../slave.conf &amp;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>集群</p>
@@ -430,8 +432,7 @@
 <blockquote>
 <p>数据迁移</p>
 </blockquote>
-<p>当我们需要新增节点时，只需要从以往节点中分配部分slot到新节点；需要删除节点时，先把该节点的slot转移到其他节点，然后删除即可。这个功能极大方便了集群的线性扩展或缩容，并不会造成集群不可用的状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">masterA-&gt;masterB: migrating</span><br><span class="line">note left of masterA:MIGRATING</span><br><span class="line">note right of masterB:IMPORTING</span><br></pre></td></tr></table></figure></p>
-<p>在slot迁移过程中，masterA状态为MIGRATING，masterB状态为IMPORTING。<br>真正改变node映射的是键空间迁移。</p>
+<p>当我们需要新增节点时，只需要从以往节点中分配部分slot到新节点；需要删除节点时，先把该节点的slot转移到其他节点，然后删除即可。这个功能极大方便了集群的线性扩展或缩容，并不会造成集群不可用的状态。<br><img src="http://static.zybuluo.com/mayibz/rbrcgcun2i9gcf6o982aa39f/image.png" alt="image.png-14.4kB"><br>在slot迁移过程中，masterA状态为MIGRATING，masterB状态为IMPORTING。<br>真正改变node映射的是键空间迁移。</p>
 <p>src目录下的集群管理命令redis-trib.rb支持reshard的手动在线迁移方式。</p>
 <table>
 <thead>
@@ -762,11 +763,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color4">jdk</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">jdk</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
