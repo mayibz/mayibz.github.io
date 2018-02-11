@@ -6,31 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://mayibz.me">
-  <title>动手搭_redis集群 | 蚂蚁的宝藏</title>
+  <title>Redis特性解读 | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
-<meta name="keywords" content="redis,搭建">
+  <meta name="description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。Consistency（一致性）: 所有节点在同一时间具有相同的数据Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。 任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动手搭_redis集群">
-<meta property="og:url" content="http://mayibz.me/2018/02/10/动手搭_redis集群/index.html">
+<meta property="og:title" content="Redis特性解读">
+<meta property="og:url" content="http://mayibz.me/2018/02/11/redis特性解读/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
-<meta property="og:description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
+<meta property="og:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。Consistency（一致性）: 所有节点在同一时间具有相同的数据Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。 任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/ji0y1ocpzab87beqx9jhn3el/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/sclrpfh8ixs27b0nwll8y15g/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/jxha2qyeh8api98ds7xpm81x/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/osy1l1abu6vlym2m1qj4thbm/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/hisi73gpi3spsdtgwdzguavk/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/vourdtpovtnp7q1s3rtw8xem/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/aex9nz74we8qibfwvib2tqus/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/nx96o15yh9hwl09vheye3pzf/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/fbl0xazu1sramgg6fcxtno71/image.png">
-<meta property="og:updated_time" content="2018-02-10T08:24:11.292Z">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/qgcmeta7pm41t33lichtl91q/image.png">
+<meta property="og:image" content="http://static.zybuluo.com/mayibz/k7cupte3qacnn5a8ffebctso/image.png">
+<meta property="og:updated_time" content="2018-02-11T09:59:17.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动手搭_redis集群">
-<meta name="twitter:description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
-<meta name="twitter:image" content="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png">
+<meta name="twitter:title" content="Redis特性解读">
+<meta name="twitter:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。Consistency（一致性）: 所有节点在同一时间具有相同的数据Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。 任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可">
+<meta name="twitter:image" content="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
   
@@ -182,64 +175,148 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-动手搭_redis集群" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-redis特性解读" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      动手搭_redis集群
+      Redis特性解读
     </h1>
   
 
 
         
-        <a href="/2018/02/10/动手搭_redis集群/" class="archive-article-date">
-  	<time datetime="2018-02-10T08:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
+        <a href="/2018/02/11/redis特性解读/" class="archive-article-date">
+  	<time datetime="2018-02-11T09:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>搭建redis集群至少需要三个master节点。</p>
-<p>我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。</p>
-<a id="more"></a>
+        <p>传统数据库遵循ACID原则，而NOSQL遵循CAP原则。<br>Consistency（一致性）: 所有节点在同一时间具有相同的数据<br>Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求<br>Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。</p>
+<p>任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可用性上要做出权衡。redis在一致性上做出了妥协，采用结果最终一致性的弱化处理数据异步复制。</p>
 <blockquote>
-<p>修改配置文件</p>
+<p>redis演变</p>
 </blockquote>
-<p>创建集群配置目录，用端口号命名好区分 8001 &amp; 8002<br>复制redis.conf文件分别至8001和8002目录下。<br>修改redis.conf文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">port 8001     #端口号</span><br><span class="line">logfile &quot;/srv/redis-3.2.9/cluster-conf/8001/redis.log&quot;  #指定日志文件</span><br><span class="line">dir &quot;/srv/redis-cluster/8001/&quot;              #数据存放文件位置rdb,aop,nodes.conf</span><br><span class="line">cluster-enabled yes                         #开启集群</span><br><span class="line">cluster-config-file  nodes.conf             #集群节点信息文件命名</span><br><span class="line">cluster-node-timeout 5000                   #集群节点超时毫秒数</span><br><span class="line">appendonly yes                              #开启aof持久化</span><br><span class="line">bind 0.0.0.0                                #绑定ip。</span><br></pre></td></tr></table></figure></p>
-<p>同理 130和131机器，修改这些配置。</p>
+<h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p>redis提供复制功能，用户可以通过复制master来创建多个slave。只要主从服务器之间通信正常，会保持相同的数据，master会一直将自身的数据更新至slave。<em>解决了master的读压力。</em></p>
+<h4 id="哨兵"><a href="#哨兵" class="headerlink" title="哨兵"></a>哨兵</h4><p>redis sentinel 在分布式系统中，监控主从服务器，在master下线，会自动进行故障转移，保证了系统的高可用。</p>
+<h4 id="集群（proxy）"><a href="#集群（proxy）" class="headerlink" title="集群（proxy）"></a>集群（proxy）</h4><p>通过增加proxy层来进行数据分片，减轻redis的写压力。但是proxy层无法保证高可用，维护成本增加。</p>
+<h4 id="集群（直连型）"><a href="#集群（直连型）" class="headerlink" title="集群（直连型）"></a>集群（直连型）</h4><p>去除proxy层，无中心架构；通过选举制实现故障转移，完成slave到master的角色转换；节点可动态扩张；通过增加slave节点实现高可用；数据按照slot存储，节点数据可共享。</p>
 <blockquote>
-<p>启动节点</p>
+<p>redis数据结构</p>
 </blockquote>
-<p>cd 到bin目录下,<code>./redis-server ../8001/redis.conf&amp;</code> 分别启动各自机器的8001和8002</p>
+<p>redis以 <em>key-value 键值对</em> 作为存储方式。支持多种数据结构。</p>
+<p><em>String</em><br>string是redis使用最多的数据结构之一，value大小不能超过512M，set的时候，可以不用引号。<br>值可以是字符串，整数，浮点数。<br>若值为数字，做运算时，redis会自动进行转换。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   SET key value  |    定义key并赋值   |<br>|   GET key |   获取key的值 |<br>|   DEL key |   删除key |<br>|   APPEND key value |  末尾追加，字符串拼接    |<br>|   STRLEN key |    获取字符串长度    |<br>|   INCR key    |   自增    |<br>|   DECR key    |   自减    |<br>|   INCRBY key increment |  按指定步长增长 |<br>|   DECRBY key increment |  按指定步长减少 |<br>|   SETEX  key seconds value | 同时设置过期时间，同EXPIRE，可使用TTL查看剩余时间</p>
+<p><em>List</em><br>链表上的每个节点包含一个字符串。链表的两端都可以进行读写。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   LPUSH key value |   向链表左端添加元素value    |<br>|   RPUSH key value |   向链表右端添加元素value    |<br>|   LPOP key  |   从链表左侧读取并移除元素 |<br>|   RPOP key  |   从链表右侧读取并移除元素 |<br>|   LINDEX key index    |   按index读取vaule    |<br>|   LRANGE key start stop   |   读取指定范围的元素  |<br>|   BRPOP  key[key …] timeout | 阻塞的方式从链表右侧弹出元素,如果元素为空，阻塞等待，直到超时或者有值返回   |<br>|   BLPOP key[key …] timeout |    阻塞的方式从链表右侧弹出元素,如果元素为空，阻塞等待，直到超时或者有值返回   |</p>
+<p><em>Set</em><br>无序且无重复的字符串集合<br>常用命令：<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>| SADD key value    | 向key中添加元素value，成功返回1，失败返回0 |<br>| SREM key value        |   从key中移除元素value，成功1，失败0   |<br>| SMEMBERS key  |  列出key中所有元素  |<br>| SISMEMBER key value        |    判断key中是否存在元素value，没找到0    | </p>
+<p><em>zset</em><br>有序的set集合，通过浮点数score来实现。<br>元素a，b,若a.score&gt;b.score,则a&gt;b;若a.score=b.score,a&gt;b,则a&gt;b。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   ZADD key score member  |    向key集合中插入memeber，设置score   |<br>|   ZRANGE key start stop   |   读取指定范围类元素  |<br>|   ZRANGEBYSCORE key min man   |   按照score的范围读取元素 |<br>|   ZREM    key member  |   移除元素    |</p>
+<p><em>hash</em><br>包含key,value的散列表。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   HMSET key field value   [field value …]  |    添加值  |<br>|   HGET key field  |   取值    |<br>|   HMGET key field [field …] |   取值    |<br>|   HGETALL key |   获取所有元素  |<br>|   HDEL key field [field …]  |   删除指定字段    |</p>
 <blockquote>
-<p>创建集群</p>
+<p>事务</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./redis-trib.rb create --replicas 1 192.168.0.11:7001 192.168.0.12:7001 192.168.0.13:7001 192.168.0.11:7002 192.168.0.12:7002 192.168.0.13:7002 </span><br><span class="line"></span><br><span class="line">## 切换到src目录下，执行tedis-trib.rb集群管理命令</span><br><span class="line">## replicas 1 表示为集群中的每一个主节点通过创建的先后顺序创建一个从节点</span><br></pre></td></tr></table></figure>
-<p>redis-trib.rb需要先安装ruby环境 <code>yum install ruby</code> <code>yum install rubygems</code></p>
-<p><img src="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png" alt="image.png-67.8kB"><br><img src="http://static.zybuluo.com/mayibz/ji0y1ocpzab87beqx9jhn3el/image.png" alt="image.png-81.7kB"></p>
-<p>集群信息代表意思分别是：</p>
-<p>节点id<br>ip：port<br>角色（master0 slaver1），主节点的id<br>节点最后一次返回pong回复的时间<br>连接次数<br>节点占有的槽(slot)</p>
-<p><img src="http://static.zybuluo.com/mayibz/sclrpfh8ixs27b0nwll8y15g/image.png" alt="image.png-37.9kB"></p>
+<p>因为redis是单线程来处理所有client的请求，所以redis对事务的处理比较简单，通过一个类似阻塞队列的东西保证一个client发起的事务中的命令可以顺序执行，中间不会插入其他client的命令。</p>
+<p>通过 EXEC 命令来开启一个事务，DISCARD取消事务，EXEC结束事务</p>
 <blockquote>
-<p>测试</p>
+<p>发布订阅</p>
 </blockquote>
-<p>通过<code>./redis-cli -c</code>集群连接模式，set一个key,可以看到，通过crc126算法定位到130这台机器对应的slot,然后存放。<br><img src="http://static.zybuluo.com/mayibz/jxha2qyeh8api98ds7xpm81x/image.png" alt="image.png-13.7kB"></p>
-<p>如果130机器上的master节点宕掉，能否拿到site的值？<br><img src="http://static.zybuluo.com/mayibz/osy1l1abu6vlym2m1qj4thbm/image.png" alt="image.png-17.4kB"><br><img src="http://static.zybuluo.com/mayibz/hisi73gpi3spsdtgwdzguavk/image.png" alt="image.png-34.7kB"><br>停掉 130机器的8001 master节点。<br><img src="http://static.zybuluo.com/mayibz/vourdtpovtnp7q1s3rtw8xem/image.png" alt="image.png-8.2kB"><br>可以看到，并没有收到影响，从129的8002 slave机器上取到了值。</p>
-<p>那么停到129的8002呢？<br><img src="http://static.zybuluo.com/mayibz/aex9nz74we8qibfwvib2tqus/image.png" alt="image.png-15.5kB"><br><img src="http://static.zybuluo.com/mayibz/nx96o15yh9hwl09vheye3pzf/image.png" alt="image.png-7.1kB"><br>可以看到，集群挂掉了。所以结论：<strong>停掉一个master或者slave 服务正常，停掉master<br>和slave集群挂掉。</strong></p>
-<p>重启这两个节点。<br><img src="http://static.zybuluo.com/mayibz/fbl0xazu1sramgg6fcxtno71/image.png" alt="image.png-35.7kB"><br>可以看到，redis通过选举，master身份发生了变化。</p>
+<p>发布订阅（pub/sub）是类似观察者模式的一种消息通信模式，发送者(pub)发送消息，订阅者(sub)接收消息。</p>
+<p><img src="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png" alt="image.png-44.1kB"></p>
+<p>ps.网上找的图</p>
+<p>SUBSCRIBE 订阅主题,开启通道，获取消息<br>PUBLISH 推送消息<br>UNSUBSCRIBE  取消主题</p>
 <blockquote>
-<p>遇到的问题</p>
+<p>持久化</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## /usr/bin/env: ruby: No such file or directory</span><br><span class="line">解决：安装ruby环境，**不要直接yum install ruby，redis要求ruby版本2.4以上**使用rvm安装。</span><br><span class="line"></span><br><span class="line">## ./redis-trib.rb:24:in `require&apos;: no such file to load -- rubygems (LoadError)</span><br><span class="line">from ./redis-trib.rb:24</span><br><span class="line">解决：yum install rubygems</span><br><span class="line"></span><br><span class="line">## in `gem_original_require&apos;: no such file to load -- redis (LoadError)</span><br><span class="line">from /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require&apos;</span><br><span class="line">解决：gem install redis</span><br><span class="line"></span><br><span class="line">## 创建集群节点时出错，检查bind修改为0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>为了防止服务宕机内存数据丢失，redis提供了三种持久化方式：RDB（deafult）,AOF,RDB和AOF同时使用。</p>
+<p>RDB:</p>
+<p>定时调用 <em>rdbSave</em> 函数，将内存数据写入一个dump.rdb，如果文件存在，替换。<br>操作 <em>rdbSave</em> 函数有两种命令，SAVE和BGSAVE<br>SAVE命令会直接调用rdbSave函数，在RDB文件保存期间，主进程会被阻塞，服务端无法处理客户端请求，保存完成，唤醒主线程。<br>BGSAVE命令会先fork一个子进程，由子进程调用 <em>rdbSave</em> 函数，不会阻塞主进程，服务端仍可服务客户端，保存完成，子进程会向主进程发送通知。<br>在redis服务启动或重启时，会调用 <em>rdbLoad</em> 函数，加载磁盘中的RDB文件到内存中。</p>
+<p>+——-+————-+———–+—————–+—–+———–+<br>| REDIS | RDB-VERSION | SELECT-DB | KEY-VALUE-PAIRS | EOF | CHECK-SUM |<br>+——-+————-+———–+—————–+—–+———–+</p>
+<pre><code>|&lt;-------- DB-DATA ----------&gt;|
+</code></pre><p><img src="http://static.zybuluo.com/mayibz/qgcmeta7pm41t33lichtl91q/image.png" alt="image.png-11.6kB"></p>
+<p>保存策略：<br>save 900 10   #900s内超过10个key被修改，发起快照保存。</p>
+<p>AOF:<br>append-only-file,以协议（RESP）文本的方式，把数据库的命令操作参数追加到aof文件中。<br>这个过程分为三步：<br>1.命令传播：Redis 将执行完的命令、命令的参数、命令的参数个数等信息发送到 AOF 程序中。<br>2.缓存追加：AOF 程序根据接收到的命令数据，将命令转换为网络通讯协议的格式，然后将协议内容追加到服务器的 AOF 缓存中。<br>3.文件写入和保存：AOF 缓存中的内容被写入到 AOF 文件末尾，如果设定的 AOF 保存条件被满足的话， fsync 函数或者 fdatasync 函数会被调用，将写入的内容真正地保存到磁盘中。<br>AOF支持三种保存模式：<br>1.AOF_FSYNC_NO ：不保存。<br>2.AOF_FSYNC_EVERYSEC ：每一秒钟保存一次。（不阻塞主进程）<br>3.AOF_FSYNC_ALWAYS ：每执行一个命令保存一次。（阻塞主进程）</p>
+<p><em>参考文献</em> – 《Redis设计与实现》</p>
+<p><img src="http://static.zybuluo.com/mayibz/k7cupte3qacnn5a8ffebctso/image.png" alt="image.png-16.9kB"></p>
+<p>可以看到 rdb文件中存储的数据，aof文件中存储的是命令+数据，而且aof的文件可读性更高。<br>除此之外，AOF的更新频率高于RDB，优先加载aof。</p>
+<blockquote>
+<p>复制</p>
+</blockquote>
+<p>redis的复制方式有两种，一种是主（master）-从（slave），一种是从（slave）-从（slave）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">slave-&gt;master: 发送sync命令</span><br><span class="line">master-&gt;master: sub process</span><br><span class="line">master-&gt;slave: 发送rdb文件，发送缓存的命令</span><br><span class="line">slave-&gt;master: 发送增量数据</span><br></pre></td></tr></table></figure>
+<p>配置方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 复制一份配置文件 cp redis.conf slave.conf</span><br><span class="line"># 修改slave的配置 slaveof ip port</span><br><span class="line"># 修改master的配置 bind 0.0.0.0</span><br><span class="line"># 启动slave ./redis-server ../slave.conf &amp;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>集群</p>
+</blockquote>
+<p>在redis集群中，引入了hash槽-slot的概念。<br>集群中的节点node，共同分配16384个slot，所以集群中节点最多只能有16384个，所有的key都对映射到对应的slot中。<br>redisCluster通过CRC16(key)/16384 来计算key属于哪个槽。</p>
+<p>通过为每个node分片不同数量的slot，按照槽来分片，可以控制不同节点的数据量和请求数。</p>
+<p>redisCluster的特点：<br>1.节点自动发现<br>2.slave-&gt;master 选举,集群容错<br>3.支持rehsard在线分片<br>4.节点直连型，不需要proxy层<br>5.所有节点彼此互连（ping-pong）</p>
+<blockquote>
+<p>数据迁移</p>
+</blockquote>
+<p>当我们需要新增节点时，只需要从以往节点中分配部分slot到新节点；需要删除节点时，先把该节点的slot转移到其他节点，然后删除即可。这个功能极大方便了集群的线性扩展或缩容，并不会造成集群不可用的状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">masterA-&gt;masterB: migrating</span><br><span class="line">note left of masterA:MIGRATING</span><br><span class="line">note right of masterB:IMPORTING</span><br></pre></td></tr></table></figure></p>
+<p>在slot迁移过程中，masterA状态为MIGRATING，masterB状态为IMPORTING。<br>真正改变node映射的是键空间迁移。</p>
+<p>src目录下的集群管理命令redis-trib.rb支持reshard的手动在线迁移方式。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>call</td>
+<td style="text-align:right">在集群全部节点上执行命令</td>
+</tr>
+<tr>
+<td>set-timeout</td>
+<td style="text-align:right">设置集群节点间心跳连接的超时时间</td>
+</tr>
+<tr>
+<td>del-node</td>
+<td style="text-align:right">从集群中删除节点</td>
+</tr>
+<tr>
+<td>reshard</td>
+<td style="text-align:right">在线迁移slot</td>
+</tr>
+<tr>
+<td>check</td>
+<td style="text-align:right">检查集群</td>
+</tr>
+<tr>
+<td>import</td>
+<td style="text-align:right">将外部redis数据导入集群</td>
+</tr>
+<tr>
+<td>add-node</td>
+<td style="text-align:right">将新节点加入集群</td>
+</tr>
+<tr>
+<td>create</td>
+<td style="text-align:right">创建集群</td>
+</tr>
+<tr>
+<td>info</td>
+<td style="text-align:right">查看集群信息</td>
+</tr>
+<tr>
+<td>fix</td>
+<td style="text-align:right">修复集群</td>
+</tr>
+<tr>
+<td>rebalance</td>
+<td style="text-align:right">自动平分集群节点slot数量</td>
+</tr>
+</tbody>
+</table>
 
       
 	 
 	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/02/10/动手搭_redis集群/" target="_blank" title="动手搭_redis集群">动手搭_redis集群</a></b>,本文链接为<b><a href="/2018/02/10/动手搭_redis集群/" target="_blank" title="动手搭_redis集群">http://mayibz.me/2018/02/10/动手搭_redis集群/</a></b>.</code></pre>
+            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/02/11/redis特性解读/" target="_blank" title="Redis特性解读">Redis特性解读</a></b>,本文链接为<b><a href="/2018/02/11/redis特性解读/" target="_blank" title="Redis特性解读">http://mayibz.me/2018/02/11/redis特性解读/</a></b>.</code></pre>
         
 	
       
@@ -284,10 +361,6 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搭建</a>
         		</li>
       		
 		</ul>
@@ -343,7 +416,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://mayibz.me/2018/02/10/动手搭_redis集群/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://mayibz.me/2018/02/11/redis特性解读/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -357,18 +430,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/02/11/redis特性解读/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis特性解读
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">一道“简单”的面试题_自动装箱和拆箱源码解析</div>
+    <a href="/2018/02/10/动手搭_redis集群/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动手搭_redis集群</div>
       <i class="icon-circle-right"></i>
     </a>
   

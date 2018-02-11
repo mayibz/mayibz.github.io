@@ -6,31 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://mayibz.me">
-  <title>动手搭_redis集群 | 蚂蚁的宝藏</title>
+  <title>Archives | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
-<meta name="keywords" content="redis,搭建">
-<meta property="og:type" content="article">
-<meta property="og:title" content="动手搭_redis集群">
-<meta property="og:url" content="http://mayibz.me/2018/02/10/动手搭_redis集群/index.html">
+  <meta name="description" content="别看我只是个小菜鸡~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="蚂蚁的宝藏">
+<meta property="og:url" content="http://mayibz.me/archives/page/2/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
-<meta property="og:description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
+<meta property="og:description" content="别看我只是个小菜鸡~">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/ji0y1ocpzab87beqx9jhn3el/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/sclrpfh8ixs27b0nwll8y15g/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/jxha2qyeh8api98ds7xpm81x/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/osy1l1abu6vlym2m1qj4thbm/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/hisi73gpi3spsdtgwdzguavk/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/vourdtpovtnp7q1s3rtw8xem/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/aex9nz74we8qibfwvib2tqus/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/nx96o15yh9hwl09vheye3pzf/image.png">
-<meta property="og:image" content="http://static.zybuluo.com/mayibz/fbl0xazu1sramgg6fcxtno71/image.png">
-<meta property="og:updated_time" content="2018-02-10T08:24:11.292Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动手搭_redis集群">
-<meta name="twitter:description" content="搭建redis集群至少需要三个master节点。 我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。">
-<meta name="twitter:image" content="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png">
+<meta name="twitter:title" content="蚂蚁的宝藏">
+<meta name="twitter:description" content="别看我只是个小菜鸡~">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
   
@@ -182,251 +169,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-动手搭_redis集群" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      动手搭_redis集群
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/01/28/Netty线程模型及源码浅析/" class="archive-article-date">
+  	<time datetime="2018-01-28T11:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/01/28/Netty线程模型及源码浅析/">Netty线程模型及源码浅析</a>
     </h1>
   
 
 
-        
-        <a href="/2018/02/10/动手搭_redis集群/" class="archive-article-date">
-  	<time datetime="2018-02-10T08:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>搭建redis集群至少需要三个master节点。</p>
-<p>我用了三台虚拟机，129,130,131。各一主一从，共三主三从的集群。</p>
-<a id="more"></a>
-<blockquote>
-<p>修改配置文件</p>
-</blockquote>
-<p>创建集群配置目录，用端口号命名好区分 8001 &amp; 8002<br>复制redis.conf文件分别至8001和8002目录下。<br>修改redis.conf文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">port 8001     #端口号</span><br><span class="line">logfile &quot;/srv/redis-3.2.9/cluster-conf/8001/redis.log&quot;  #指定日志文件</span><br><span class="line">dir &quot;/srv/redis-cluster/8001/&quot;              #数据存放文件位置rdb,aop,nodes.conf</span><br><span class="line">cluster-enabled yes                         #开启集群</span><br><span class="line">cluster-config-file  nodes.conf             #集群节点信息文件命名</span><br><span class="line">cluster-node-timeout 5000                   #集群节点超时毫秒数</span><br><span class="line">appendonly yes                              #开启aof持久化</span><br><span class="line">bind 0.0.0.0                                #绑定ip。</span><br></pre></td></tr></table></figure></p>
-<p>同理 130和131机器，修改这些配置。</p>
-<blockquote>
-<p>启动节点</p>
-</blockquote>
-<p>cd 到bin目录下,<code>./redis-server ../8001/redis.conf&amp;</code> 分别启动各自机器的8001和8002</p>
-<blockquote>
-<p>创建集群</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./redis-trib.rb create --replicas 1 192.168.0.11:7001 192.168.0.12:7001 192.168.0.13:7001 192.168.0.11:7002 192.168.0.12:7002 192.168.0.13:7002 </span><br><span class="line"></span><br><span class="line">## 切换到src目录下，执行tedis-trib.rb集群管理命令</span><br><span class="line">## replicas 1 表示为集群中的每一个主节点通过创建的先后顺序创建一个从节点</span><br></pre></td></tr></table></figure>
-<p>redis-trib.rb需要先安装ruby环境 <code>yum install ruby</code> <code>yum install rubygems</code></p>
-<p><img src="http://static.zybuluo.com/mayibz/9ho04osldte8r93l0nvciyff/image.png" alt="image.png-67.8kB"><br><img src="http://static.zybuluo.com/mayibz/ji0y1ocpzab87beqx9jhn3el/image.png" alt="image.png-81.7kB"></p>
-<p>集群信息代表意思分别是：</p>
-<p>节点id<br>ip：port<br>角色（master0 slaver1），主节点的id<br>节点最后一次返回pong回复的时间<br>连接次数<br>节点占有的槽(slot)</p>
-<p><img src="http://static.zybuluo.com/mayibz/sclrpfh8ixs27b0nwll8y15g/image.png" alt="image.png-37.9kB"></p>
-<blockquote>
-<p>测试</p>
-</blockquote>
-<p>通过<code>./redis-cli -c</code>集群连接模式，set一个key,可以看到，通过crc126算法定位到130这台机器对应的slot,然后存放。<br><img src="http://static.zybuluo.com/mayibz/jxha2qyeh8api98ds7xpm81x/image.png" alt="image.png-13.7kB"></p>
-<p>如果130机器上的master节点宕掉，能否拿到site的值？<br><img src="http://static.zybuluo.com/mayibz/osy1l1abu6vlym2m1qj4thbm/image.png" alt="image.png-17.4kB"><br><img src="http://static.zybuluo.com/mayibz/hisi73gpi3spsdtgwdzguavk/image.png" alt="image.png-34.7kB"><br>停掉 130机器的8001 master节点。<br><img src="http://static.zybuluo.com/mayibz/vourdtpovtnp7q1s3rtw8xem/image.png" alt="image.png-8.2kB"><br>可以看到，并没有收到影响，从129的8002 slave机器上取到了值。</p>
-<p>那么停到129的8002呢？<br><img src="http://static.zybuluo.com/mayibz/aex9nz74we8qibfwvib2tqus/image.png" alt="image.png-15.5kB"><br><img src="http://static.zybuluo.com/mayibz/nx96o15yh9hwl09vheye3pzf/image.png" alt="image.png-7.1kB"><br>可以看到，集群挂掉了。所以结论：<strong>停掉一个master或者slave 服务正常，停掉master<br>和slave集群挂掉。</strong></p>
-<p>重启这两个节点。<br><img src="http://static.zybuluo.com/mayibz/fbl0xazu1sramgg6fcxtno71/image.png" alt="image.png-35.7kB"><br>可以看到，redis通过选举，master身份发生了变化。</p>
-<blockquote>
-<p>遇到的问题</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## /usr/bin/env: ruby: No such file or directory</span><br><span class="line">解决：安装ruby环境，**不要直接yum install ruby，redis要求ruby版本2.4以上**使用rvm安装。</span><br><span class="line"></span><br><span class="line">## ./redis-trib.rb:24:in `require&apos;: no such file to load -- rubygems (LoadError)</span><br><span class="line">from ./redis-trib.rb:24</span><br><span class="line">解决：yum install rubygems</span><br><span class="line"></span><br><span class="line">## in `gem_original_require&apos;: no such file to load -- redis (LoadError)</span><br><span class="line">from /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require&apos;</span><br><span class="line">解决：gem install redis</span><br><span class="line"></span><br><span class="line">## 创建集群节点时出错，检查bind修改为0.0.0.0</span><br></pre></td></tr></table></figure>
-
-      
-	 
-	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/02/10/动手搭_redis集群/" target="_blank" title="动手搭_redis集群">动手搭_redis集群</a></b>,本文链接为<b><a href="/2018/02/10/动手搭_redis集群/" target="_blank" title="动手搭_redis集群">http://mayibz.me/2018/02/10/动手搭_redis集群/</a></b>.</code></pre>
-        
-	
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>如果有一天我的梦想被风雨淋湿，你是否愿意回头扶我一把？<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/wxpay.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搭建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://mayibz.me/2018/02/10/动手搭_redis集群/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/02/11/redis特性解读/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis特性解读
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/02/05/一道“简单”的面试题 _ 自动装箱和拆箱源码解析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">一道“简单”的面试题_自动装箱和拆箱源码解析</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-	 
-  
-  
-  
+    </div></section>
   
 
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </nav>
   
-
-  
-
-  
-  
-  	  
-			<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" style="width:90%;margin:0px auto" data-uid="MTAyMC8zMzc2MS8xMDMxNQ==">
-		<script type="text/javascript">
-		   (function(d, s) {
-			   var j, e = d.getElementsByTagName(s)[0];
-
-			   if (typeof LivereTower === 'function') { return; }
-
-			   j = d.createElement(s);
-			   j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-			   j.async = true;
-
-			   e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	
-
-	
 
 
           </div>
@@ -456,8 +257,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
