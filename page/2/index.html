@@ -171,20 +171,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Netty线程模型及源码浅析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-博客铭" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/28/Netty线程模型及源码浅析/">Netty线程模型及源码浅析</a>
+      <a class="article-title" href="/2018/01/28/博客铭/">博客铭</a>
     </h1>
   
 
 
         
-        <a href="/2018/01/28/Netty线程模型及源码浅析/" class="archive-article-date">
+        <a href="/2018/01/28/博客铭/" class="archive-article-date">
   	<time datetime="2018-01-28T11:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-28</time>
 </a>
         
@@ -192,16 +192,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>总算是搭好了自己的博客，第一篇就写写最近关于netty的学习心得吧~~</p>
-<h2 id="netty初识"><a href="#netty初识" class="headerlink" title="- netty初识"></a>- <strong>netty初识</strong></h2><p>用过Dubbo的对netty应该都不陌生，Dubbo底层呢就用了netty 3，那么netty到底是个什么东西呢？<br>百度百科 “Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。” 我觉得netty就是优化了nio的高性能网络通信框架，当然它也支持旧IO。<br>先看看jdk的nio吧，我们都知道nio是单线程非阻塞IO，底层由操作系统的Reactor多路复用实现。单线程这个特性，就决定了它无法高效的利用cpu资源。那么我来尝试开启多个线程来处理SelectKey。<br>
+        <p>老师说，你如果能考虑清楚你以后要做什么事，你会领先别人5年。暑假实习的时候，老板第一句就问你的未来规划是什么？hr问，你5年后想过什么样的生活？<br>
         
-          <a class="article-more-a" href="/2018/01/28/Netty线程模型及源码浅析/#more">more >></a>
+          <a class="article-more-a" href="/2018/01/28/博客铭/#more">more >></a>
         
       
 	 
 	    
-            <pre><code><b>版权声明</b>:本文由<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>创作和发表,采用<b>署名(BY)</b>-<b>非商业性使用(NC)</b>-<b>相同方式共享(SA)</b>国际许可协议进行许可,转载请注明作者及出处,本文作者为<b><a href="/about" target="_blank" title="蚂蚁的宝藏">蚂蚁的宝藏</a></b>,本文标题为<b><a href="/2018/01/28/Netty线程模型及源码浅析/" target="_blank" title="Netty线程模型及源码浅析">Netty线程模型及源码浅析</a></b>,本文链接为<b><a href="/2018/01/28/Netty线程模型及源码浅析/" target="_blank" title="Netty线程模型及源码浅析">http://mayibz.me/2018/01/28/Netty线程模型及源码浅析/</a></b>.</code></pre>
-        
 	
       
     </div>
@@ -213,7 +210,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -223,7 +220,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/28/Netty线程模型及源码浅析/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/28/博客铭/">展开全文 >></a>
         </p>
       
 
@@ -350,6 +347,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
@@ -358,19 +359,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protobuf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
               </li>
             
             <div class="clearfix"></div>

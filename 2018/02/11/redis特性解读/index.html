@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://mayibz.me">
   <title>Redis特性解读 | 蚂蚁的宝藏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。Consistency（一致性）: 所有节点在同一时间具有相同的数据Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。 任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可">
+  <meta name="description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis特性解读">
 <meta property="og:url" content="http://mayibz.me/2018/02/11/redis特性解读/index.html">
 <meta property="og:site_name" content="蚂蚁的宝藏">
-<meta property="og:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。Consistency（一致性）: 所有节点在同一时间具有相同的数据Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。 任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可">
+<meta property="og:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/qgcmeta7pm41t33lichtl91q/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/k7cupte3qacnn5a8ffebctso/image.png">
-<meta property="og:updated_time" content="2018-02-11T09:59:17.168Z">
+<meta property="og:updated_time" content="2018-02-11T10:02:27.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis特性解读">
-<meta name="twitter:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。Consistency（一致性）: 所有节点在同一时间具有相同的数据Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。 任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可">
+<meta name="twitter:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。">
 <meta name="twitter:image" content="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png">
   
     <link rel="alternative" href="/atom.xml" title="蚂蚁的宝藏" type="application/atom+xml">
@@ -196,7 +196,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>传统数据库遵循ACID原则，而NOSQL遵循CAP原则。<br>Consistency（一致性）: 所有节点在同一时间具有相同的数据<br>Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求<br>Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。</p>
+        <p>传统数据库遵循ACID原则，而NOSQL遵循CAP原则。<br><a id="more"></a><br>Consistency（一致性）: 所有节点在同一时间具有相同的数据<br>Availability（可用性）：集群中一部分节点失效后，集群整体保证响应客服端的读写请求<br>Partition tolerance（分区容灾性）：系统中任意信息的丢失或失败不会影响系统继续运行。</p>
 <p>任何时候，最多满足以上两点，在分布式存储中，分区容灾性是必须的，所以在一致性和可用性上要做出权衡。redis在一致性上做出了妥协，采用结果最终一致性的弱化处理数据异步复制。</p>
 <blockquote>
 <p>redis演变</p>
@@ -583,6 +583,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
@@ -591,19 +595,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">protobuf</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
               </li>
             
             <div class="clearfix"></div>
