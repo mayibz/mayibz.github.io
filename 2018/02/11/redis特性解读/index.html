@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/ug82nwq7ni59cida1liar20d/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/qgcmeta7pm41t33lichtl91q/image.png">
 <meta property="og:image" content="http://static.zybuluo.com/mayibz/k7cupte3qacnn5a8ffebctso/image.png">
-<meta property="og:updated_time" content="2018-02-11T10:02:27.955Z">
+<meta property="og:updated_time" content="2018-02-11T10:29:11.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis特性解读">
 <meta name="twitter:description" content="传统数据库遵循ACID原则，而NOSQL遵循CAP原则。">
@@ -209,11 +209,186 @@
 <p>redis数据结构</p>
 </blockquote>
 <p>redis以 <em>key-value 键值对</em> 作为存储方式。支持多种数据结构。</p>
-<p><em>String</em><br>string是redis使用最多的数据结构之一，value大小不能超过512M，set的时候，可以不用引号。<br>值可以是字符串，整数，浮点数。<br>若值为数字，做运算时，redis会自动进行转换。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   SET key value  |    定义key并赋值   |<br>|   GET key |   获取key的值 |<br>|   DEL key |   删除key |<br>|   APPEND key value |  末尾追加，字符串拼接    |<br>|   STRLEN key |    获取字符串长度    |<br>|   INCR key    |   自增    |<br>|   DECR key    |   自减    |<br>|   INCRBY key increment |  按指定步长增长 |<br>|   DECRBY key increment |  按指定步长减少 |<br>|   SETEX  key seconds value | 同时设置过期时间，同EXPIRE，可使用TTL查看剩余时间</p>
-<p><em>List</em><br>链表上的每个节点包含一个字符串。链表的两端都可以进行读写。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   LPUSH key value |   向链表左端添加元素value    |<br>|   RPUSH key value |   向链表右端添加元素value    |<br>|   LPOP key  |   从链表左侧读取并移除元素 |<br>|   RPOP key  |   从链表右侧读取并移除元素 |<br>|   LINDEX key index    |   按index读取vaule    |<br>|   LRANGE key start stop   |   读取指定范围的元素  |<br>|   BRPOP  key[key …] timeout | 阻塞的方式从链表右侧弹出元素,如果元素为空，阻塞等待，直到超时或者有值返回   |<br>|   BLPOP key[key …] timeout |    阻塞的方式从链表右侧弹出元素,如果元素为空，阻塞等待，直到超时或者有值返回   |</p>
-<p><em>Set</em><br>无序且无重复的字符串集合<br>常用命令：<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>| SADD key value    | 向key中添加元素value，成功返回1，失败返回0 |<br>| SREM key value        |   从key中移除元素value，成功1，失败0   |<br>| SMEMBERS key  |  列出key中所有元素  |<br>| SISMEMBER key value        |    判断key中是否存在元素value，没找到0    | </p>
-<p><em>zset</em><br>有序的set集合，通过浮点数score来实现。<br>元素a，b,若a.score&gt;b.score,则a&gt;b;若a.score=b.score,a&gt;b,则a&gt;b。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   ZADD key score member  |    向key集合中插入memeber，设置score   |<br>|   ZRANGE key start stop   |   读取指定范围类元素  |<br>|   ZRANGEBYSCORE key min man   |   按照score的范围读取元素 |<br>|   ZREM    key member  |   移除元素    |</p>
-<p><em>hash</em><br>包含key,value的散列表。<br>| 命令        |  说明  |<br>| ——–   | —–:  |<br>|   HMSET key field value   [field value …]  |    添加值  |<br>|   HGET key field  |   取值    |<br>|   HMGET key field [field …] |   取值    |<br>|   HGETALL key |   获取所有元素  |<br>|   HDEL key field [field …]  |   删除指定字段    |</p>
+<p><em>String</em><br>string是redis使用最多的数据结构之一，value大小不能超过512M，set的时候，可以不用引号。<br>值可以是字符串，整数，浮点数。<br>若值为数字，做运算时，redis会自动进行转换。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SET key value</td>
+<td style="text-align:right">定义key并赋值</td>
+</tr>
+<tr>
+<td>GET key</td>
+<td style="text-align:right">获取key的值</td>
+</tr>
+<tr>
+<td>DEL key</td>
+<td style="text-align:right">删除key</td>
+</tr>
+<tr>
+<td>APPEND key value</td>
+<td style="text-align:right">末尾追加，字符串拼接</td>
+</tr>
+<tr>
+<td>STRLEN key</td>
+<td style="text-align:right">获取字符串长度</td>
+</tr>
+<tr>
+<td>INCR key</td>
+<td style="text-align:right">自增</td>
+</tr>
+<tr>
+<td>DECR key</td>
+<td style="text-align:right">自减</td>
+</tr>
+<tr>
+<td>INCRBY key increment</td>
+<td style="text-align:right">按指定步长增长</td>
+</tr>
+<tr>
+<td>DECRBY key increment</td>
+<td style="text-align:right">按指定步长减少</td>
+</tr>
+<tr>
+<td>SETEX  key seconds value</td>
+<td style="text-align:right">同时设置过期时间，同EXPIRE，可使用TTL查看剩余时间</td>
+</tr>
+</tbody>
+</table>
+<p><em>List</em><br>链表上的每个节点包含一个字符串。链表的两端都可以进行读写。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LPUSH key value</td>
+<td style="text-align:right">向链表左端添加元素value</td>
+</tr>
+<tr>
+<td>RPUSH key value</td>
+<td style="text-align:right">向链表右端添加元素value</td>
+</tr>
+<tr>
+<td>LPOP key</td>
+<td style="text-align:right">从链表左侧读取并移除元素</td>
+</tr>
+<tr>
+<td>RPOP key</td>
+<td style="text-align:right">从链表右侧读取并移除元素</td>
+</tr>
+<tr>
+<td>LINDEX key index</td>
+<td style="text-align:right">按index读取vaule</td>
+</tr>
+<tr>
+<td>LRANGE key start stop</td>
+<td style="text-align:right">读取指定范围的元素</td>
+</tr>
+<tr>
+<td>BRPOP  key[key …] timeout</td>
+<td style="text-align:right">阻塞的方式从链表右侧弹出元素,如果元素为空，阻塞等待，直到超时或者有值返回</td>
+</tr>
+<tr>
+<td>BLPOP key[key …] timeout</td>
+<td style="text-align:right">阻塞的方式从链表右侧弹出元素,如果元素为空，阻塞等待，直到超时或者有值返回</td>
+</tr>
+</tbody>
+</table>
+<p><em>Set</em><br>无序且无重复的字符串集合</p>
+<p>常用命令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SADD key value</td>
+<td style="text-align:right">向key中添加元素value，成功返回1，失败返回0</td>
+</tr>
+<tr>
+<td>SREM key value</td>
+<td style="text-align:right">从key中移除元素value，成功1，失败0</td>
+</tr>
+<tr>
+<td>SMEMBERS key</td>
+<td style="text-align:right">列出key中所有元素</td>
+</tr>
+<tr>
+<td>SISMEMBER key value</td>
+<td style="text-align:right">判断key中是否存在元素value，没找到0</td>
+</tr>
+</tbody>
+</table>
+<p><em>zset</em><br>有序的set集合，通过浮点数score来实现。<br>元素a，b,若a.score&gt;b.score,则a&gt;b;若a.score=b.score,a&gt;b,则a&gt;b。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZADD key score member</td>
+<td style="text-align:right">向key集合中插入memeber，设置score</td>
+</tr>
+<tr>
+<td>ZRANGE key start stop</td>
+<td style="text-align:right">读取指定范围类元素</td>
+</tr>
+<tr>
+<td>ZRANGEBYSCORE key min man</td>
+<td style="text-align:right">按照score的范围读取元素</td>
+</tr>
+<tr>
+<td>ZREM    key member</td>
+<td style="text-align:right">移除元素</td>
+</tr>
+</tbody>
+</table>
+<p><em>hash</em><br>包含key,value的散列表。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HMSET key field value   [field value …]</td>
+<td style="text-align:right">添加值</td>
+</tr>
+<tr>
+<td>HGET key field</td>
+<td style="text-align:right">取值</td>
+</tr>
+<tr>
+<td>HMGET key field [field …]</td>
+<td style="text-align:right">取值</td>
+</tr>
+<tr>
+<td>HGETALL key</td>
+<td style="text-align:right">获取所有元素</td>
+</tr>
+<tr>
+<td>HDEL key field [field …]</td>
+<td style="text-align:right">删除指定字段</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>事务</p>
 </blockquote>
